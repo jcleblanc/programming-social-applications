@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs title="Chapter 4 Example" description="Display social information fetch and push abilities">
+        <Require feature="opensocial-0.9"/>
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html" view="canvas"><![CDATA[ 
+    <link type="text/css" href="http://github.com/jcleblanc/programming-social-applications/raw/master/opensocial-gadgets/ch4_social_get_set/styles.css">
+    
+    <div id="gadget">
+        <div id="railRight">
+            <div class="header">Other Profiles</div>
+            <div id="friendLinks"></div>
+            <div class="header">Update Your Friends</div>
+            <form name="addActivity" onSubmit="return false;">
+                <label for="title">Title:</label><br />
+                <input type="text" name="title" id="title" /><br />
+                
+                <label for="description">Description:</label><br />
+                <input type="text" name="description" id="description" /><br />
+                
+                <label for="url">URL:</label><br />
+                <input type="text" name="url" id="url" /><br /><br />
+                <button onclick="socialController.addActivity();">Add Activity</button>
+            </form>
+        </div>
+        <div id="updates">
+            <div class="header">Updates From Your Connections</div>
+            <div id="updateContent"></div>
+        </div>
+    </div>
+        
+    <script type="text/javascript">
+    var socialController = {
+        //fetch profile photos for friends
+        fetchProfile: function(insertID){
+            osapi.people.get({userId: "@viewer", groupId: "@friends", count: 12}).execute(function(result){
+                var friends = result.list;
+                var html = '';
+                for (var i = 0; i < friends.length; i++){
+                   html += "<a href='" + friends[i].profileUrl + "'><img src='" + friends[i].thumbnailUrl + "' /></a>";
+                }
+                document.getElementById(insertID).innerHTML = html;
+            });
+        },
+        
+        //fetch update stream for friends
+        fetchUpdates: function(insertID){
+            osapi.activities.get({userId: "@viewer", groupId: "@friends", count: 30}).execute(function(result){
+                console.log(result);
+                var activities = result.list;
+                var html = '';
+        
+                for (var i = 0; i < activities.length; i++){
+                    html += "<p><a href='" + activities[i].url + "'>" + activities[i].title + "</a><br /></p>";
+                }
+                document.getElementById(insertID).innerHTML = html;
+            });
+        },
+        
+        //insert a new activity for the current viewer
+        addActivity: function(){
+            osapi.activities.create({
+                userId: "@viewer",
+                groupId: "@self",
+                activity: {
+                   title: document.getElementById("title").value, 
+                   body: document.getElementById("description").value,
+                   url: document.getElementById("url").value
+                }
+            }).execute();
+        }
+    };
+    
+    socialController.fetchProfile("friendLinks");
+    socialController.fetchUpdates("updateContent");
+    </script>
+    ]]></Content>
+</Module>
