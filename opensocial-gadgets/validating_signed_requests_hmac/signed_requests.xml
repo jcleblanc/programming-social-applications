@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+    <ModulePrefs title="Validating Signed Requests" description="Validates signed requests - HMAC-SHA1" author="" author_link="http://profiles.yahoo.com/u/NJFIDHVPVVISDXZKT7UKED2WHU">
+        <Icon></Icon>
+        <Require feature="opensocial-0.9"/>
+    </ModulePrefs>
+    <Content type="html"><![CDATA[
+    <script>
+    function makeSignedRequest() {
+        var params = {};
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        var url = "http://www.jcleblanc.com/projects/yap_training/signed_requests_validate.php";
+        gadgets.io.makeRequest(url, response, params);
+      };
+      
+      function response(ret) {
+        console.log(ret);
+      };
+      
+      makeSignedRequest();
+    </script>
+    ]]>
+    </Content>
+</Module>
