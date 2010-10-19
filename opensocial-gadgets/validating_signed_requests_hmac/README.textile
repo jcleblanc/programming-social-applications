@@ -1,4 +1,5 @@
 h2. Validating Signed OpenSocial Requests - HMAC-SHA1
+
 This sample code is intended to showcase how to validate OpenSocial HMAC-SHA1 signed requests.  This validation is an alternate method of "Validating Signed Request":http://wiki.opensocial.org/index.php?title=Validating_Signed_Requests via public certs.  This sample code includes the following files:
 * signed_requests.xml - The OpenSocial gadget that initiates the signed request
 * signed_requests_validate.php - The server-side validation script
