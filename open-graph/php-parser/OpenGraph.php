@@ -1,7 +1,9 @@
 <?php
 /*******************************************************************************
- * Class Name: 
- * Description: 
+ * Class Name: Open Graph Parser
+ * Description: Parses an HTML document to retrieve and store Open Graph
+ *              tags from the meta data
+ * Author: Jonathan LeBlanc (Twitter: @jcleblanc)
  * Useage: 
  *   $url = 'http://www.example.com/index.html';
  *   $graph = new OpenGraph($url);
