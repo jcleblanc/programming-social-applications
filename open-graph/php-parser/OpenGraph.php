@@ -4,6 +4,7 @@
  * Description: Parses an HTML document to retrieve and store Open Graph
  *              tags from the meta data
  * Author: Jonathan LeBlanc (Twitter: @jcleblanc)
+ * License: Creative Commons (http://creativecommons.org/licenses/by-sa/2.0/)
  * Useage: 
  *   $url = 'http://www.example.com/index.html';
  *   $graph = new OpenGraph($url);

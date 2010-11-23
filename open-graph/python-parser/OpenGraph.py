@@ -4,8 +4,10 @@ from BeautifulSoup import BeautifulSoup
 
 """
 " Class: Open Graph Parser
-" Description:
-" Author:
+" Description: Parses an HTML document to retrieve and store Open Graph
+"              tags from the meta data
+" Author: Jonathan LeBlanc
+" License: Creative Commons (http://creativecommons.org/licenses/by-sa/2.0/)
 " Useage:
 "    url = 'http://www.nhl.com/ice/player.htm?id=8468482';
 "    og_instance = OpenGraphParser(url)  
