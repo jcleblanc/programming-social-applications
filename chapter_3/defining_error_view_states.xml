@@ -1,0 +1,12 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="views" />
+   </ModulePrefs>
+   <Content view="canvas" href="http://www.mysite.com/canvas.php" />
+   <Content type="html" view="canvas.error">
+      <![CDATA[             
+      An error occurred, please refresh the application window.     
+      ]]>
+   </Content>
+</Module>
+

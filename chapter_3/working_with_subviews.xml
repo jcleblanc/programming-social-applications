@@ -1,0 +1,18 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="views" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <button onclick=”gadgets.views.requestNavigateTo(‘canvas.sub’);”>
+         Click to navigate to the canvas sub page
+      </button>
+      ]]>
+   </Content>
+   <Content view="canvas.sub">
+      <![CDATA[ 
+      This is the content of my subpage
+      ]]>
+   </Content>
+</Module>
+

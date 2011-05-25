@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+   <ModulePrefs title="Chapter 3 rollup example"
+                title_url="http://www.jcleblanc.com"
+                description="Displays the concepts of viewes and module preferences"
+                author="Jonathan LeBlanc">
+      <Require feature="opensocial-0.9"/>
+      <Require feature="views" />
+      <Preload href="http://www.mysite.com/small.php" />
+      <Locale lang="en" country="us" />
+      <Link rel="event.addapp" href="http://www.mysite.com/add_app.php" />
+      <Link rel="event.removeapp" href="http://www.mysite.com/remove_app.php" />
+   </ModulePrefs>
+   <Content type="url" view="home, profile" href="http://www.mysite.com/small.php" />
+   <Content type="html" view="canvas">
+      <![CDATA[
+      This is my standard large view
+      ]]>
+   </Content>
+   <Content type="html" view="canvas, home, profle">
+      <![CDATA[
+      <!-- Standard footer for all content views -->
+      <div id="footer">
+         Navigation Options: 
+         <a onclick="gadgets.views.requestNavigateTo('home');">Home</a> |
+         <a onclick="gadgets.views.requestNavigateTo('profile');">Profile</a> |
+         <a onclick="gadgets.views.requestNavigateTo('canvas');">Canvas</a>
+      </div>
+    
+      <style type="text/css">
+      div.contentWrap, div#footer{ font:11px arial,helvetica,sans-serif; }
+      div#footer{ font-size:10px; 
+                  font-weight:bold; 
+                  margin-top:10px; 
+                  padding:10px; 
+                  border-top:1px solid #e3e3e3; }
+      div#footer a{ cursor:pointer; }
+      </style>
+      ]]>
+   </Content>
+   <Content type="html" view="canvas.error, profile.error, home.error">
+      The application could not be loaded at the current time.  
+   </Content>
+</Module>

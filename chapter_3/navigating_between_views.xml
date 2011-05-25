@@ -1,0 +1,20 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="views" />
+   </ModulePrefs>
+   <Content view="profile">
+      <![CDATA[ 
+      <button onclick="gadgets.views.requestNavigateTo(‘canvas’); ">
+         Click to navigate to the canvas view
+      </button>
+      ]]>
+   </Content>
+   <Content view="canvas">
+   <![CDATA[ 
+      <button onclick="gadgets.views.requestNavigateTo(‘profile’); ">
+         Click to navigate to the profile view
+      </button>
+   ]]>
+   </Content>
+</Module> 
+

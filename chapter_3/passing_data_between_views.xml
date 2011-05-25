@@ -1,0 +1,27 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="views" />
+   </ModulePrefs>
+   <Content view="profile">
+      <![CDATA[ 
+      <script type=”text/javascript”>
+      function loadCanvas(postData){
+         gadgets.views.requestNavigateTo(‘canvas’, postData);
+      }
+      </script>
+      <button onclick=”loadCanvas(‘user123’);”>
+         Click to navigate to the canvas view
+      </button>
+      ]]>
+   </Content>
+   <Content view="canvas">
+      <![CDATA[ 
+      <div id=”postData”></div>
+      <script type=”text/javascript”>
+         var postVal = gadgets.views.getParams();
+         document.getElementById(‘postData’).innerHTML = postVal;
+      </script>
+      ]]>
+   </Content>
+</Module>
+
