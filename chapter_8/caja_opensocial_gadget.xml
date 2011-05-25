@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+   <ModulePrefs title="Caja Sample"
+                title_url="http://www.jcleblanc.com"
+                description="Displays a simple content section to cajole"
+                author="Jonathan LeBlanc">
+      <Require feature="opensocial-0.9"/>
+      <Require feature="caja" />
+   </ModulePrefs>
+   <Content type="html">
+      <![CDATA[
+      <div id="number">0</div>
+      <button onclick="changeNum('+')">+</button>
+      <button onclick="changeNum('-')">-</button>
+    
+      <script type="text/javascript">
+      //increment or decrement the counter
+      function changeNum(changeType){
+         var num = document.getElementById("number");
+         num.innerHTML = (changeType == "+") ?
+                         parseInt(num.innerHTML) + 1 :
+                         parseInt(num.innerHTML) - 1;
+      }
+      </script>
+   ]]>
+   </Content>
+</Module>
+

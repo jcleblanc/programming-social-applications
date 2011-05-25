@@ -1,0 +1,27 @@
+<div id="method1">Clicking here will do something!</div>
+<div id="method2">Clicking here will do something too!</div>
+
+<script type="text/javascript">
+//method 1 click handler
+function handler1(sender){
+   document.getElementById('method1').innerHTML = "Method 1 Clicked";
+}
+
+//method 2 click handler
+function handler2(sender){
+   document.getElementById('method2').innerHTML = "Method 2 Clicked";
+}
+
+//attach click events for method 1
+var myClickEl = document.getElementById('method1');
+if(myClickEl.addEventListener){   
+   myClickEl.addEventListener('click', handler1, false);
+} else if(myClickEl.attachEvent){
+   myClickEl.attachEvent('click', handler1);
+}
+
+//attach click events for method 2
+var myClickEl2 = document.getElementById('method2');
+myClickEl2.onclick = handler2;
+</script>
+

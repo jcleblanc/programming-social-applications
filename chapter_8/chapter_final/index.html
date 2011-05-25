@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+<title>Web sanitization with Caja</title>
+<script src="jquery.min.js" type="text/javascript"></script> 
+
+<!-- caja cajoler script and whitelist definitions -->
+<script src="../../src/com/google/caja/plugin/html-sanitizer.js"></script>
+<script src="html4-defs.js"></script>
+
+<style>
+.contentBox{ width:400px; 
+             padding:5px; 
+             float:left; 
+             border:1px solid #868686; 
+             margin-right:10px; }
+.contentRendered{ height:400px; 
+                  overflow:hidden; }
+.contentRaw{ height:200px; 
+             overflow:auto; }
+.contentBox *, form *{ font:12px arial,helvetica,sans-serif; }
+.header{ background-color:#868686; 
+         color:#fff; 
+         font-size:16px; 
+         font-weight:bold; 
+         text-align:center; 
+         padding:5px; }
+.clear{ clear:both; 
+        height:10px; }
+
+#file{ width:300px; }
+#errorMsg{ color:#d32424; 
+           font-weight:bold; 
+           display:none;  }
+</style>
+</head>
+<body>
+<form action="javascript:void(0);">
+    <div id="errorMsg"></div>
+    <input type="text" name="file" id="file" />
+    <input type="submit" value="Load File" onclick="getFile()">
+</form>
+
+<div class="contentBox contentRendered">
+    <div class="header">Original Content: Rendered</div>
+    <div id="original_rendered"></div>
+</div>
+<div class="contentBox contentRendered">
+    <div class="header">Cajoled Content: Rendered</div>
+    <div id="cajoled_rendered"></div>
+</div>
+
+<div class="clear"></div>
+
+<div class="contentBox contentRaw">
+    <div class="header">Original Content: Raw</div>
+    <div id="original_raw"></div>
+</div>    
+<div class="contentBox contentRaw">
+    <div class="header">Cajoled Content: Raw</div>
+    <div id="cajoled_raw"></div>
+</div>
+
+<script type="text/javascript">
+function getFile(){
+   var errorMsgNode = $('#errorMsg');
+   errorMsgNode.css("display", "none");
+   
+   var filePath = $('#file').val();
+   
+   if (filePath.length > 1){
+      $.ajax({
+         url: filePath,
+         success: function(data){
+            //load unmodified code
+            $('#original_raw').text(data);
+            $('#original_rendered').html(data);
+            
+            //load cajoled content
+            var cajoled_data = html_sanitize(data);
+            $('#cajoled_raw').text(cajoled_data);
+            $('#cajoled_rendered').html(cajoled_data);
+         },
+         error: function(request){
+            var errorMsg = "Failed to load file"
+                         + "<br />Status: " + request.status
+                         + "<br />Error: " + request.statusText;
+            
+            errorMsgNode.css("display", "block");
+            errorMsgNode.html(errorMsg);
+         }
+      });
+   }
+}
+</script>
+</body>
+</html>
+

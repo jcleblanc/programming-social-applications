@@ -1,0 +1,13 @@
+<style type="text/css"> 
+   a:visited{ color:#c0c0c0; } 
+   a:link{ color:#000; } 
+</style>
+
+<a href="http://www.yahoo.com" id="link1">Yahoo!</a><br /> 
+<a href="http://www.facebook.com" id="link2">Facebook</a>
+
+<script type="text/javascript"> 
+   var compStyle = getComputedStyle(document.getElementById("link1"), "")
+   var color = compStyle.getPropertyValue("color");
+</script>
+
