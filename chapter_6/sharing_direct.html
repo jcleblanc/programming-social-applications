@@ -1,0 +1,25 @@
+<div id=”msgNode”></div>
+<div id=”shareMsg”>
+   Tell your friends that you’ve updated your profile and earn 5 app bucks!<br />
+   <button onclick=”addActivity();”>Share</button>
+</div>
+
+<script type=”text/javascript”>
+//make request to create a new activity
+function addActivity(){
+   osapi.activities.create({
+      userId: “@viewer”,
+      activity: {
+         title: “I’ve updated my profile – click to see the updates”, 
+         url: “http://www.container.com/myapp”
+      }
+   }).execute(function(){
+      //activity has been shared – display success message
+      document.getElementById(“msgNode”).innerHTML = “Your message has been shared”;
+      document.getElementById(“shareMsg”).style.display = “none”;
+      
+      //logic to add 5 app bucks to user profile
+   });
+}
+</script>
+

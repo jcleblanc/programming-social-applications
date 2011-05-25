@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+   <ModulePrefs title="GET Request to Flickr via YQL">
+      <Require feature="osapi"/>
+   </ModulePrefs>
+   <Content type="html" view="canvas">
+      <![CDATA[
+      <div id="imgContainer"></div>
+        
+      <script type="text/javascript">
+      //GET request callback
+      function requestCallback(response){
+         var photolist = response.content.query.results.photo, html = "";
+
+         //loop through each image and create an <img> tag
+         for (var i in photolist){
+            if (photolist.hasOwnProperty(i)){
+               html += "<img src='http://farm" + photolist[i].farm +
+                       ".static.flickr.com/" + photolist[i].server +
+                       "/" + photolist[i].id +
+                       "_" + photolist[i].secret +
+                       ".jpg' alt='" + photolist[i].title +"' /><br />";
+               document.getElementById('imgContainer').innerHTML = html;
+            }   
+         }
+      }
+        
+      //make GET request
+      var url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20
+                 flickr.photos.search%20where%20text%3D%22Montreal%22&format=json";
+      osapi.http.get({
+         "href": url,
+         "format": "json"
+      }).execute(requestCallback);
+      </script>
+      ]]>
+   </Content>
+</Module>
+

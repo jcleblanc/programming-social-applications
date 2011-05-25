@@ -1,0 +1,26 @@
+<label for=”user”></label>
+<input type=”text” name=”user” id=”user” /><br />
+<label for=”pass”></label>
+<input type=”hidden” name=”pass” id=”pass” />
+<button onclick=”updateRecord();”>Update User</button>
+<div id=”response”></div>
+
+<script type="text/javascript">
+function updateRecord(){
+   //set up url and post data
+   var url = "http://www.mysite.com/updateUser.php";
+   var postData = “user=” + 
+      encodeURIComponent(document.getElementById(“user”).value) + “&pass=” +        
+      encodeURIComponent(document.getElementById(“pass”).value);
+   
+   //POST data object to URL   
+   osapi.http.post({
+      "href": url,
+      "body": postData,
+      "format": "text"
+   }).execute(function(response){
+      document.getElementById(“response”).innerHTML = “Data Posted”;
+   });
+}
+</script>
+

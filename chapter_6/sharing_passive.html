@@ -1,0 +1,19 @@
+<!-- INSERT: Form elements to update the profile -->
+Update your profile
+<button onclick=”updateProfile();”>Update Profile</button>
+
+<script type=”text/javascript”>
+//function to update the user profile
+function updateProfile (){
+   //INSERT: request scripts to update user profile
+
+   //make request to update profile
+   osapi.activities.create({
+      userId: “@viewer”,
+      activity: {
+         title: “I’ve updated my profile – click to see the updates”, 
+         url: “http://www.container.com/myapp”
+      }
+   }).execute();
+</script>
+

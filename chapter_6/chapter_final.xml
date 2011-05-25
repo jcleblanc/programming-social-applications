@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Chapter Example" 
+                description="Display social information fetch and push abilities">
+      <Require feature="opensocial-0.9"/>
+      <Require feature="osapi" />
+   </ModulePrefs>
+   <Content type="html" view="canvas">
+      <![CDATA[
+      <style type="text/css">
+      div#gadget{ font:11px arial,helvetica,sans-serif; }
+      div#gadget div.header{ background-color:#858585; 
+                             color:#fff; font-weight:bold; 
+                             font-size:12px; 
+                             padding:5px; 
+                             margin:5px; }
+      div#gadget div#railRight{ width:360px; 
+                                float:right; 
+                                border:1px solid #858585; 
+                                margin:0 0 15px 15px; 
+                                padding:10px; 
+                                background-color:#eaeaea; }
+      div#gadget div#railRight div#friendLinks img{ border:0; 
+                                                    margin:5px; 
+                                                    width:50px; 
+                                                    height:50px; }
+      div#gadget div#railRight form{ margin:10px 5px; }
+      div#gadget div#railRight form label{ font-weight:bold; }
+      div#gadget div#railRight form input{ width:300px; }
+      div#gadget div#updates{ margin-left:5px; 
+                              margin-right:390px; }
+      div#gadget div#updates div.header{ margin:0; }
+      </style>
+
+      <div id="gadget">
+         <div id="railRight">
+            <div class="header">Other Profiles</div>
+            <div id="friendLinks"></div>
+            <div class="header">Update Your Friends</div>
+            <form name="addActivity" onSubmit="return false;">
+               <label for="title">Title:</label><br />
+               <input type="text" name="title" id="title" /><br />
+                
+               <label for="description">Description:</label><br />
+               <input type="text" name="description" id="description" /><br />
+                
+               <label for="url">URL:</label><br />
+               <input type="text" name="url" id="url" /><br /><br />
+               <button onclick="socialController.addActivity();">Add Activity</button>
+            </form>
+         </div>
+         <div id="updates">
+            <div class="header">Updates From Your Connections</div>
+            <div id="updateContent"></div>
+         </div>
+      </div>
+
+      <script type="text/javascript">
+      var socialController = {
+         //fetch profile photos for friends
+         fetchProfile: function(insertID){
+            //make GET request for 12 viewer friend profiles 
+            osapi.people.get({userId: "@viewer", 
+                              groupId: "@friends", 
+                              count: 12}).execute(function(result){
+               var friends = result.list;
+               var html = '';
+
+               //for each friend found, create a profile image linked to their profile
+               for (var i = 0; i < friends.length; i++){
+                  html += "<a href='" + friends[i].profileUrl + "'><img src='" 
+                           + friends[i].thumbnailUrl + "' /></a>";
+               }
+               document.getElementById(insertID).innerHTML = html;
+            });
+         },
+        
+         //fetch update stream for friends
+         fetchUpdates: function(insertID){
+            //make GET request for 30 viewer friend activities
+            osapi.activities.get({userId: "@viewer", 
+                                  groupId: "@friends", 
+                                  count: 30}).execute(function(result){
+               var activities = result.list; var html = '';
+
+               //for each activity, create a title linked to their source
+               for (var i = 0; i < activities.length; i++){
+                  html += "<p><a href='" + activities[i].url + "'>" 
+                        + activities[i].title + "</a><br /></p>";
+               }
+               document.getElementById(insertID).innerHTML = html;
+            });
+         },
+        
+         //insert a new activity for the current viewer
+         addActivity: function(){
+            osapi.activities.create({userId: "@viewer", groupId: "@self",
+               activity: { 
+                  title: document.getElementById("title").value, 
+                  body: document.getElementById("description").value,
+                  url: document.getElementById("url").value
+               }
+            }).execute();      
+         }
+      };
+
+      //initialize data requests    
+      socialController.fetchProfile("friendLinks");
+      socialController.fetchUpdates("updateContent");
+      </script>
+      ]]>
+   </Content> 
+</Module>
+
