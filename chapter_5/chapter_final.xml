@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+    <ModulePrefs title="Chapter 5 rollup example"
+                 title_url="http://www.jcleblanc.com"
+                 description="Displays the profile information for the current user and user friends"
+                 author="Jonathan LeBlanc">
+        <Require feature="opensocial-0.9"/>
+        <Require feature="osapi" />
+    </ModulePrefs>
+    <Content type="html"><![CDATA[
+        <style type="text/css">
+        div#gadget{ font:11px arial,helvetica,sans-serif; }
+        div#gadget div.header{ background-color:#858585; color:#fff; font-weight:bold; font-size:12px; padding:5px; margin:5px; }
+        div#gadget div#railRight{ width:360px; float:right; border:1px solid #858585; margin:0 0 15px 15px; padding:10px; background-color:#eaeaea; }
+        div#gadget div#railRight span{ margin:5px; }
+        div#gadget div#railRight div#friendLinks img{ border:0; margin:5px; width:50px; height:50px; cursor:pointer; }
+        div#gadget div#updates{ margin-left:5px; margin-right:390px; }
+        div#gadget div#updates div.header{ font-size:15px; margin:0; }
+        div#gadget div#updates div#profileContent img{ margin:10px; }
+        div#gadget div#updates div#profileContent div{ font-size:14px; margin:5px 10px; }
+        div#gadget div#updates div#profileContent span{ font-weight:bold; }
+        </style>
+    
+        <div id="gadget">
+            <div id="railRight">
+                <div class="header">Other Profiles</div>
+                <span>Click on an image below to load the profiles of your connections</span>
+                <div id="friendLinks"></div>
+            </div>
+            <div id="updates">
+                <div class="header">Current Profile</div>
+                <div id="profileContent"></div>
+            </div>
+        </div>
+            
+        <script type="text/javascript">
+        var socialController = {
+            //fetch profile photos for friends
+            fetchConnections: function(insertID){
+                osapi.people.get({userId: "@viewer", groupId: "@friends", count: 36}).execute(function(result){
+                    var friends = result.list;
+                    var html = '';
+                    for (var i = 0; i < friends.length; i++){
+                        html += "<img src='" + friends[i].thumbnailUrl + "' onclick='socialController.loadProfile(\"" + friends[i].id + "\");' />";
+                    }
+                    document.getElementById(insertID).innerHTML = html;
+                });
+            },
+            
+            //load profile for a given user
+            loadProfile: function(uid){
+                osapi.people.get({userId: uid}).execute(function(result){
+                    console.log(result);
+                    if (!result.error){
+                        //build basic profile information
+                        var name = result.name.givenName + " " + result.name.familyName;
+                        var html = "<img src='" + result.thumbnailUrl + "' alt='profile image' />"
+                                 + "<div><span>Name:</span> " + name + "</div>"
+                                 + "<div><span>Gender:</span> " + result.gender + "</div>"
+                                 + "<div><span>Profile URL:</span> <a href='" + result.profileUrl + "'>" + result.profileUrl + "</a></div><br />"
+                                 + "<div class='header'>Profile URLs</div>";
+                        
+                        //load all urls for the user
+                        for (var i = 0; i < result.urls.length; i++){
+                            html += "<div><span>" + result.urls[i].type + ": </span>"
+                                  + "<a href='" + result.urls[i].value + "'>" + result.urls[i].value + "</a></div>";
+                        }
+                        
+                        //add new markup to the application
+                        document.getElementById("profileContent").innerHTML = html;
+                    }
+                });
+            }
+        };
+        
+        //load friend list
+        socialController.fetchConnections("friendLinks");
+        
+        //load viewer profile information
+        socialController.loadProfile("@viewer");
+        </script>
+    ]]></Content>
+</Module>
