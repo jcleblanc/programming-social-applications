@@ -1,0 +1,132 @@
+<Module>
+   <ModulePrefs title="Chapter 4 Example" 
+                description="Displays some of the key concepts 
+                             learned in chapter 4" 
+                author="Jonathan LeBlanc" 
+                author_link="http://www.jcleblanc.com">
+      <Require feature="opensocial-0.9"/>
+      <Require feature="tabs" />
+      <Require feature="minimessage"/>
+      <Require feature="setprefs"/>
+      <Locale lang="en" country="us" />
+   </ModulePrefs>
+   <UserPref name="contactMethod" 
+             default_value="email" 
+             datatype="hidden" />
+   <UserPref name="contactEmail" 
+             default_value="None Entered" 
+             datatype="hidden" />
+   <UserPref name="contactTwitter" 
+             default_value="None Entered" 
+             datatype="hidden" />
+   <Content type="html" view="canvas, home, profile">
+      <![CDATA[
+      <style type="text/css">
+      .tablib_table{ margin-top:10px; }
+      #messageWindow{ padding:5px; 
+                      margin:5px; }     
+      #tabSetting, #tabInfo{ padding:5px; }
+      #displayPrefs{ background-color:#eaeaea; 
+                     margin:10px 5px; 
+                     padding:5px; 
+                     display:none; }
+      </style>
+        
+      <div id="tabSetting">
+         <div id="messageWindow">
+            Please click on the "More Information" tab for helpful links
+         </div>
+         <form name="contactInfo">
+            <p>
+               <input type="radio" name="contactMethod" value="twitter" /> 
+               Twitter<br />
+      
+               <input type="radio" name="contactMethod" value="email" /> 
+               E-Mail
+            </p>
+               
+            <p>
+               <label for="contactEmail">Email Address: </label>
+               <input type="text" id="contactEmail" />
+            </p>
+                
+            <p>
+               <label for="contactTwitter">Twitter Address: </label>
+               <input type="text" id="contactTwitter" />
+            </p>
+    
+            <button onclick="savePrefs();return false;">Save Preferences</button>
+            <button onclick="showPrefs();return false;">Show Preferences</button>
+    
+            <div id="displayPrefs">
+               <b>User Preferences:</b><br />
+               Contact Method: <span id="listMethod"></span><br />
+               E-Mail Address: <span id="listEmail"></span><br />
+               Twitter Address: <span id="listTwitter"></span>
+            </div>
+         </form>
+      </div>
+      <div id="tabInfo">
+         More information about features in this chapter:
+         <ul>
+            <li>OpenSocial: http://www.opensocial.org/</li>
+            <li>OpenSocial Wiki: http://wiki.opensocial.org/</li>
+            <li>Shindig: http://shindig.apache.org/</li>
+            <li>Partuza: http://code.google.com/p/partuza/</li>
+         </ul>
+      </div>
+            <script type="text/javascript">
+      var prefs = new gadgets.Prefs();
+        
+      //get user preferences and save them
+      function savePrefs(){
+         var method = "email";
+   
+         //loop through all options to see which contact methods was checked
+         for (var i=0; i < document.contactInfo.contactMethod.length; i++){
+            if (document.contactInfo.contactMethod[i].checked){
+               method = document.contactInfo.contactMethod[i].value;
+            }
+         }
+         var email = document.contactInfo.contactEmail.value;
+         var twitter = document.contactInfo.contactTwitter.value;
+            
+         //set preferences
+         prefs.set("contactMethod", method);
+         prefs.set("contactEmail", email);
+         prefs.set("contactTwitter", twitter);
+            
+         if (document.getElementById("displayPrefs").style.display == "block"){
+            showPrefs();
+         }
+      }
+        
+      //display preferences from stored values
+      function showPrefs(){
+         document.getElementById("displayPrefs").style.display = "block";
+         document.getElementById("listMethod").innerHTML = 
+            prefs.getString("contactMethod");
+         document.getElementById("listEmail").innerHTML = 
+            prefs.getString("contactEmail");
+         document.getElementById("listTwitter").innerHTML = 
+            prefs.getString("contactTwitter");
+      }
+        
+      //create a new tabset object with the settings tab set
+      var tabs = new gadgets.TabSet("tabSet1", "Setting Configuration");
+      tabs.alignTabs("left", 50);
+  
+      //create two tabs
+      tabs.addTab("More Information", { 
+         contentContainer: document.getElementById("tabInfo"), 
+         tooltip: "Select this tab for more details" 
+      });
+      tabs.addTab("Setting Configuration", "tabSetting");
+        
+      //display message window about more information
+      var message = new gadgets.MiniMessage("message1");
+      message.createTimerMessage(document.getElementById("messageWindow"), 2);
+      </script>
+      ]]>
+   </Content>
+</Module>

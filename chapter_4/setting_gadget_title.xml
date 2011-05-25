@@ -1,0 +1,23 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="settitle" />
+   </ModulePrefs>
+   <Content view="canvas"><![CDATA[ 
+      <form name=”titleForm”>
+         Input new gadget title<br />
+         <input type=”text” name=”newTitle”><br />
+         <button onclick=”setTitle();”>Set New Title</button>
+      </form>
+
+      <script type=”text/javascript”>
+      function setTitle(){
+         //capture user title input
+         var newTitle = form.newTitle.value;
+
+         //set the gadget title
+         gadgets.window.setTitle(newTitle);
+      }
+      </script>
+   ]]></Content>
+</Module>
+

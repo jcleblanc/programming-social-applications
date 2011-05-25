@@ -1,0 +1,27 @@
+<Module title="Gadget to position a single message">
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <style type=”text/css”>
+      #msgWindow{ width:200px; float:right; }
+      </style>
+
+      <div id=”msgWindow”>
+         <b>This is my message header</b><br />
+         Visit <a href=”http://www.mysite.com”>my site</a> for more details.
+      </div>
+
+      <script type=”text/javascript”>
+      //create new mini-message object
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+
+      //get the message node and create a new dismissible mini-message 
+      var msgWindow = document.getElementById(“msgWindow”);
+      message.createDismissibleMessage(msgWindow);
+      </script>
+      ]]>
+   </Content>
+</Module>
+

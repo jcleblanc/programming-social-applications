@@ -1,0 +1,28 @@
+<Module title="Gadget to style all message windows">
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[
+      <style type=”text/css”>
+      .mmlib_table{  
+          font: bold 11px arial,helvetica,sans-serif;
+          background-color: #000;
+          color: #fff;
+      }
+      .mmlib_xlink{ 
+         font-weight: bold; 
+         color: #da1d1d;
+         cursor: pointer;
+      }
+      </style>
+ 
+      <script type=”text/javascript”>
+      //create new dismissible mini-message and capture returned node
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+      var msgObj = message.createDismissibleMessage(“My message content”);
+      </script>
+      ]]>
+   </Content>
+</Module>
+

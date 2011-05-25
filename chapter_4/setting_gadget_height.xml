@@ -1,0 +1,26 @@
+<Module title=”Module to make AJAX request and dynamically resize view”>
+   <ModulePrefs>
+      <Require feature="dynamic-height" />
+   </ModulePrefs>
+   <Content view="canvas" preferred_height=”300px”>
+      <![CDATA[ 
+      <div id=”updateNode”>This is my initial content to be updated</div>
+      <button onclick=”makeRequest();”>Update Page Content</button>
+
+      <script type=”text/javascript”>
+      function makeRequest(){
+         //make AJAX request to get new page content using OpenSocial AJAX methods
+         osapi.http.get({'href':'http://example.com/sendResp.php'}).execute(function(result){
+ 
+            //update div with new content obtained from request
+            document.getElementById('updateNode').innerHTML = result.content; 
+
+            //dynamically resize the view height to the new content height
+            gadgets.window.adjustHeight();
+         });
+      }
+      </script>
+      ]]>
+   </Content>
+</Module>
+

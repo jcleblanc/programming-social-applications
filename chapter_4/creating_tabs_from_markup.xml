@@ -1,0 +1,24 @@
+<Module title=”Tabs Example”>
+   <ModulePrefs>
+      <Require feature="tabs" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+         <div id=”tab1” style=”display:none;”>This is the content of Tab 1</div>
+         <div id=”tab2” style=”display:none;”>
+            <b>Heading for Tab 2</b><br />
+            See more details on <a href=”http://www.mysite.com”>my site</a>.
+         </div>
+
+         <script type=”text/javascript”>
+         //create a new tabset object with the default tab set
+         var tabs = new gadgets.TabSet(__MODULE_ID__, "Second Tab");
+
+         //create two tabs out of our markup
+         tabs.addTab("First Tab ", "tab1");
+         tabs.addTab("Second Tab", "tab2");
+         </script>
+      ]]>
+   </Content>
+</Module>
+

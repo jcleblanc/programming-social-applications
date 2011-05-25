@@ -1,0 +1,23 @@
+<Module title=”Gadget to display a mini-message”>
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <button onclick=”dismissWindow();”>Close Window</button>
+
+      <script type=”text/javascript”>
+      //create new dismissible mini-message
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+
+      //dismiss window function
+      function dismissWindow(){
+         gadgets.MiniMessage.dismissMessage(message);
+      }
+
+      //create new static message window
+      message.createStaticMessage(“This is my static mini-message”);
+      </script>
+      ]]>
+   </Content>
+</Module>

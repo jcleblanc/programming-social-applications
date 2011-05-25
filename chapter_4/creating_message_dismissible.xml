@@ -1,0 +1,22 @@
+<Module title=”Gadget to display a mini-message”>
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <div id=”msgDisplay”></div>
+      
+      <script type=”text/javascript”>
+      //message dismissal callback
+      function msgCallback(){
+         document.getElementById(“msgDisplay”).innerHTML = “Message window closed”;
+      }
+
+      //create new dismissible mini-message
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+      message.createDismissibleMessage(“This is my dismissible mini-message”, msgCallback);
+      </script>
+      ]]>
+   </Content>
+</Module>
+

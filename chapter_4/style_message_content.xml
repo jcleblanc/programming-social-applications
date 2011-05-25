@@ -1,0 +1,23 @@
+<Module title="Gadget to style message content">
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <script type=”text/javascript”>
+      //create div node for message
+      var msgNode = document.createElement(“div”);
+      msgNode.innerHTML = “See <a href=’http://mysite.com’>My Site</a> for more details”;
+
+      //set mouse events on message content
+      msgNode.onmouseover = function(obj){ obj.style.color = “#da1d1d”;  }
+      msgNode.onmouseout = function(obj){ obj.style.color = “#000”;  }
+
+      //create new dismissible mini-message
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+      message.createDismissibleMessage(msgNode);
+      </script>
+      ]]>
+   </Content>
+</Module>
+

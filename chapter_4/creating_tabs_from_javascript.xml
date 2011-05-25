@@ -1,0 +1,34 @@
+<Module title=”Tabs Example”>
+   <ModulePrefs>
+      <Require feature="tabs" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+         <div id=”tabObject”></div>
+
+         <script type=”text/javascript”>
+         //callback to be executed when tab is selected
+         function runCallback(tabID){
+            var selectedTab = document.getElementById(tabID);
+            selectedTab.style.color = “#da1d1d”;
+         }
+
+         //create a new tabset object
+         var tabs = new gadgets.TabSet();
+
+         //create new tabs
+         var tab = tabs.addTab("My Tab ", { 
+            callback: runCallback,
+            contentContainer: document.getElementById("tabObject"), 
+            tooltip: "Select this tab for more details" 
+         });
+         tabs.addTab(“Content Tab”);
+
+         //alter the content of the tab
+         var tabContent = “<b>My New Tab</b>”;
+         document.getElementBy(tab).innerHTML = tab1Content;
+         </script>
+      ]]>
+   </Content>
+</Module>
+

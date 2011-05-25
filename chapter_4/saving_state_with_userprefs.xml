@@ -1,0 +1,37 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="setprefs" />
+   </ModulePrefs>
+   <UserPref name="count" default_value="0" datatype="hidden" />
+   <Content view="canvas">
+      <![CDATA[ 
+      <div id=”myNum”>0</div>
+      <button onclick=”increment();”>Add 1</button>
+      <button onclick=”decrement();”>Subtract 1</button>
+
+      <script type=”text/javascript”>
+      var outputContainer = document.getElementById(‘myNum’);
+      //set prefs variable
+      var prefs = new gadgets.Prefs();
+
+      function increment(){
+         //capture current UserPref value
+         var count = prefs.getInt("count");
+         
+         //set new user pref and increment counter
+         prefs.set("count", count + 1);
+         outputContainer.innerHTML = count + 1; 
+      }
+
+      function decrement(){
+         //capture current UserPref value
+         var count = prefs.getInt("count");
+         
+         //set new user pref and decrement counter
+         prefs.set("count", count - 1);
+         outputContainer.innerHTML = count - 1; 
+      }
+      </script>
+      ]]>
+   </Content>
+</Module>

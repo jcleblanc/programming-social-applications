@@ -1,0 +1,19 @@
+<Module title="Gadget to style single message window">
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <script type=”text/javascript”>
+      //create new dismissible mini-message and capture returned node
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+      var msgObj = message.createDismissibleMessage(“My message content”);
+
+      //style the message window
+      msgObj.style.color = “#da1d1d”;
+      msgObj.style.backgroundColor = “#c0c0c0”;
+      </script>
+      ]]>
+   </Content>
+</Module>
+

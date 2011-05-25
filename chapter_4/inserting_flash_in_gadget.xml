@@ -1,0 +1,29 @@
+<Module>
+   <ModulePrefs>
+      <Require feature="flash" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <div id=”insertFlash”>Loading Flash Movie …</div>
+
+      <script type=”text/javascript”>
+      if (gadgets.flash.getMajorVersion() === 0){
+         //flash player not available
+         var msg = “Flash player check failed – please download flash player”;
+         document.getElementById(‘insertFlash’).innerHTML = msg;
+      } else {
+         //flash player available
+         var flashURL = 
+            “http://developer.yahoo.com/yui/examples/swf/assets/SWFExampleSimple.swf”;
+         gadgets.flash.embedFlash(flashURL, "insertFlash", {
+            swf_version: 9,
+            id: "flashObj",
+            width: 400,
+            height: 350
+         });
+      }
+      </script>
+      ]]>
+   </Content>
+</Module>
+

@@ -1,0 +1,19 @@
+<Module title=”Gadget to display a mini-message”>
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <div id=”msgDisplay”></div>
+
+      <script type=”text/javascript”>
+      //create new timer message window
+      var message = new gadgets.MiniMessage(__MODULE_ID__);
+      message.createTimerMessage(“This is my timer mini-message”, 3, function(){
+         document.getElementById(“msgDisplay”).innerHTML = “Message Dismissed”);
+      });
+      </script>
+      ]]>
+   </Content>
+</Module>
+

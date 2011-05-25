@@ -1,0 +1,21 @@
+<Module title="Gadget to position all messages">
+   <ModulePrefs>
+      <Require feature="minimessage" />
+   </ModulePrefs>
+   <Content view="canvas">
+      <![CDATA[ 
+      <div id=”msgWindow”></div>
+
+      <script type=”text/javascript”>
+      //call mini-message constructor with DOM node to position messages to
+      var msgWindow = document.getElementById(“msgWindow”);
+      var message = new gadgets.MiniMessage(__MODULE_ID__, msgWindow);
+
+      //create a new dismissible mini-message
+      message.createDismissibleMessage(“First Message”); 
+      message.createDismissibleMessage(“Second Message”);
+      </script>
+      ]]>
+   </Content>
+</Module>
+
