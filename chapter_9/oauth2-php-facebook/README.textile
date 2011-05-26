@@ -1,0 +1,12 @@
+h2. Facebook OAuth 2 Sample Code
+
+The sample code contained in this project is intended to be used to capture private Facebook data via OAuth 2.  This project contains several files that are required for integration:
+* common.php - Common variables and functions
+* index.php - Initiates the OAuth 2 request to Facebook
+* complete.php - Exchanges code for access token then makes request to get user friends
+
+To use this sample:
+* Create a new Facebook application at http://www.facebook.com/developers/ to get a key and secret for the OAuth 2 process
+* Copy all files to a directory of your choosing (in the same place as what was specified when creating your new Facebook application)
+* Edit common.php and add in your key, secret and absolute path to your complete.php file
+* Load index.php to begin the sample test

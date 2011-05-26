@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>OAuth JavaScript Sample Application</title>
+</head>
+<body>
+<script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+<script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript">
+/*******************************************************************************
+ * Function: Build OAuth Request
+ * Description: Builds a 2-legged OAuth signed request URI using a given OAuth
+ *              key and secret with a specified URI endpoint
+ ******************************************************************************/
+var buildOAuthRequest = function(key, secret, url) {
+    //create accessor and message objects
+    var accessor = { consumerSecret:secret, tokenSecret:"" };          
+    var message = { action:url, method:"GET", parameters:[["oauth_version", "1.0"],["oauth_consumer_key", key]]};
+    
+    //set timestamp, nonce and signature method
+    OAuth.setTimestampAndNonce(message);
+    OAuth.SignatureMethod.sign(message, accessor);
+
+    //build signature URL
+    var baseString = OAuth.decodeForm(OAuth.SignatureMethod.getBaseString(message));           
+    var signature = OAuth.getParameter(message.parameters, "oauth_signature");
+    var signatureURL = baseString[1][0] + "?" + baseString[2][0] + "&oauth_signature=" + encodeURIComponent(signature);
+    return signatureURL;
+};
+
+//OAuth keys and YQL query URI
+var key = 'KEY HERE';
+var secret = 'KEY HERE';
+var url = 'http://query.yahooapis.com/v1/yql?q=select%20*%20from%20social.updates.search%20where%20query%3D%22hockey%22&format=json';
+
+//obtain 2-legged OAuth request URL using key, secret and YQL URL
+var yqlURL = buildOAuthRequest(key, secret, url);
+
+//make cross-domain AJAX request against OAuth signed URI
+$.getJSON(yqlURL, function(data){
+    response = '';
+    
+    //check if there are any results available
+    if (data.query.count > 0){
+        results = data.query.results.update;
+        
+        //loop through all results and display poster and title with links
+        for (var i = 0; i < results.length; i++){
+            response += '<p>From: <a href="' + results[i].profile_profileUrl + '">'
+                      + results[i].profile_nickname + '</a><br /><a href="' + results[i].link + '">'
+                      + results[i].loc_longForm + '</a></p>'
+        }
+    //if no response is present, display appropriate message
+    } else {
+        response = 'No results were found'; 
+    }
+    
+    //print message to screen
+    document.write(response);
+});
+</script>
+
+</body></html>
