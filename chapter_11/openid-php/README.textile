@@ -1,0 +1,42 @@
+h2. OpenID Sample Code
+
+The sample code contained in this project is intended to be used to integrate support for OpenID on an external website.  This project contains several files that are required for integration:
+* index.html - The form to initiate the OpenID request
+* auth.php - Performs the discovery and authorization of the user
+* complete.php - Completion page following the user authorization
+* includes.php - Common configuration URLs, file locations and functions.  URLS AND FILE LOCATIONS NEED TO BE UPDATED WITH YOUR OWN FILES AND URLS.
+* xrds.php - The XRDS file to validate your domain during OpenID domain discovery to avoid warning messages.  See "Setting up your XRDS File" section for full details.
+
+h3. Library Dependancies
+
+This sample code requires the 2.x.x version of the PHP OpenID library to function.  Please download this library from http://openidenabled.com/php-openid/.  Within the archive is a folder titled "Auth" - copy this folder at the same level as the files in this project.
+
+h3. Setting Up Your XRDS File
+
+This section will guide you through the setup of your XRDS file.  This file is intended to bypass messages provided during authentication stating that your OpenID site's identity is not confirmed, as described at http://blog.nerdbank.net/2008/06/why-yahoo-says-your-openid-site.html.
+
+To complete this integration, the following steps must be iterated upon:
+* Edit the &lt;URI&gt; node in the xrds.php file to point to the complete.php file on your server
+* Copy the xrds.php file to your website
+* On the root page served up by your domain (e.g. /index.html) add a meta tag in the head to link to the xrds file you just uploaded.  This meta tag will look like &lt;meta http-equiv="X-XRDS-Location" content="http://www.mydomain.com/xrds.php"/&gt;
+* Your domain should should now be discoverable through the OpenID process.
+
+h3. Code Contributions
+
+This project only accepts contributions licensed under the BSD open source license. See the Open Source Initiative's approved template below.<br>
+
+Each file submitted should contain the following information in the header:<br>
+// Created by Jonathan LeBlanc<br>
+// Copyright (c) Jonathan LeBlanc, 2010.  All Rights Reserved.<br>
+// Licensed under the BSD (revised) open source license.<br>
+
+Below is the Open Source Initiative BSD License Template (http://opensource.org/licenses/bsd-license.php):<br>
+
+Copyright (c) &lt;2010&gt;, &lt;Jonathan LeBlanc&gt;<br>
+All rights reserved.<br>
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+* Neither the name of the <ORGANIZATION> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.<br>
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

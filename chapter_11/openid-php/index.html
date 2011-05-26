@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>OpenID Sample Application</title>
+</head>
+<body>
+<style>
+form{ font:12px arial,helvetica,sans-serif; }
+#openid_url { background:#FFFFFF url(http://wiki.openid.net/f/openid-16x16.gif) no-repeat scroll 5px 50%; padding-left:25px; }
+</style>
+
+<form action="auth.php" method="GET">
+    <input type="hidden" value="login" name="actionType">
+    <h2>Sign in using OpenID</h2>
+    <input type="text" style="font-size: 12px;" value="" size="40" id="openid_url" name="openid_url"> &nbsp;
+    <input type="submit" value="Sign in"> <br><small>(e.g. http://username.myopenid.com)</small><br /><br />
+    
+    <b>PAPE Policies (Optional)</b><br />
+    <input type="checkbox" name="policies[]" value="PAPE_AUTH_MULTI_FACTOR_PHYSICAL" /> PAPE_AUTH_MULTI_FACTOR_PHYSICAL<br />
+    <input type="checkbox" name="policies[]" value="PAPE_AUTH_MULTI_FACTOR" /> PAPE_AUTH_MULTI_FACTOR<br />
+    <input type="checkbox" name="policies[]" value="PAPE_AUTH_PHISHING_RESISTANT" /> PAPE_AUTH_PHISHING_RESISTANT<br />
+</form>		  
+
+</body></html>
