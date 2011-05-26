@@ -1,0 +1,50 @@
+<Templates xmlns:temp="http://www.mysite.com/template">
+   <Namespace prefix="template" url="http://www.mysite.com/template"/>
+ 
+   <Style>
+      .nodeSpacer{ margin:10px 0; 
+                   padding:5px; }
+      .textSmall{ font-size:9px; }
+   </Style>
+ 
+   <JavaScript>
+      //swap the visibility of one page
+      function switchNode(activate, deactivate){
+         //get page nodes to swap
+         var showNode = document.getElementById(activate);
+         var hideNode = document.getElementById(deactivate);
+
+         //switch the display properties of the two pages
+         hideNode.style.display = "none";
+         showNode.style.display = "block";
+      };
+   </JavaScript>
+    
+   <Template tag="template:footer">
+      <div id="footer" class="nodeSpacer textSmall">
+         Copyright &copy; 2011
+      </div>
+   </Template>
+ 
+   <TemplateDef tag="template:header">
+      <Template>
+         <div id="header" class="nodeSpacer">
+            <a onclick="requestNavigate(‘home’)">Home</a> |
+            <a onclick="requestNavigate(‘profile’)">Profile</a> |
+            <a onclick="requestNavigate(‘canvas’)">Canvas</a>
+         </div>
+       </Template>
+       <Style>
+          #header{ border-top:1px solid #000; }    
+          a{ cursor:pointer; 
+             color:#d41a1a; } 
+       </Style>
+       <JavaScript>
+          //navigate to a new container view
+          function requestNavigate(view){
+             gadgets.views.requestNavigateTo(view);
+          };
+       </JavaScript>
+   </TemplateDef>
+</Templates>
+

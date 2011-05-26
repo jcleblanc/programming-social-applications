@@ -1,0 +1,23 @@
+<div id="profile"></div>
+<script type="text/javascript">
+var profileNode = document.getElementById("profile");
+
+//build profile image
+var imgThumb = document.createElement("img");
+imgThumb.src = userData.thumbnailUrl;
+imgThumb.setAttribute("style", "float:left; margin-right:10px;");
+profileNode.appendChild(imgThumb);
+
+//build profile content text node
+var spanProfile = document.createElement("span");
+spanProfile.innerHTML = "Name: " + userData.name + "<br />Gender: " 
+                      + userData.gender + "<br />Profile: ";
+profileNode.appendChild(spanProfile);
+
+//build profile link
+var linkProfile = document.createElement("a");
+linkProfile.href = userData.profileUrl;
+linkProfile.innerText = "Click Here";
+profileNode.appendChild(linkProfile);
+</script>
+

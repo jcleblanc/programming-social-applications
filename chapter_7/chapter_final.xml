@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+   <ModulePrefs title="Chapter rollup example"
+                title_url="http://www.jcleblanc.com"
+                description="Displays templating and data pipelining 
+                             specifications"
+                author="Jonathan LeBlanc">
+      <Require feature="opensocial-0.9"/>
+      <Require feature="opensocial-data" />
+      <Require feature="opensocial-templates" />
+   </ModulePrefs>
+   <Content type="html" view="YahooFullView">
+      <![CDATA[
+      <style type="text/css">
+         #nav{ margin:5px 0 5px 15px; 
+               padding-top:10px; }
+         #nav a{ background-color:#e8f0f4; 
+                 border:1px solid #0c7099; 
+                 border-bottom:0; 
+                 color:#000; 
+                 padding:6px 8px; 
+                 margin-top:5px; }
+         #nav a{ cursor:pointer; 
+                 font-weight:bold; }
+         #nav a.navOff{ background-color:#0c7099; 
+                        color:#fff; }
+         #nav, .page{ font:12px arial,helvetica,sans-serif; }
+         .page{ margin:5px 0;
+                padding:5px;
+                margin:0 10px 15px;
+                background-color:#e8f0f4;
+                border:1px solid #0c7099; }
+         .page li{ list-style-type:none; 
+                   padding:3px 10px 3px 0; }
+         .textSmall{ font-size:10px; }
+         .hide{ display:none; }
+      </style>
+
+      <div id="nav">
+         <a id="linkCraigslist" 
+            onclick="switchNode('pageCraigslist', 'pageReddit', this)">
+            Craigslist Local</a>
+         <a id="linkReddit" 
+            onclick="switchNode('pageReddit', 'pageCraigslist', this)" 
+            class="navOff">Reddit</a>
+      </div>
+
+      <script type="text/os-data" xmlns:os="http://ns.opensocial.org/2008/markup">
+         <os:HttpRequest key="feeds" href="http://query.yahooapis.com/v1/public/yql?
+         q=select%20*%20from%20yql.query.multi%20where%20queries%3D%22select%20
+         *%20from%20rss%20where%20url%3D'http%3A%2F%2Fwww.reddit.com%2F.rss'%3B
+         select%20*%20from%20rss%20where%20url%3D'http%3A%2F%2Fsfbay.craigslist.
+         org%2Fvnn%2Findex.rss'%22&format=json&debug=true"/>
+      </script>
+
+      <script type="text/os-template" require="feeds">
+         <div id="pageReddit" class="page hide">
+            <ul>
+               <li repeat="${feeds.content.query.results.results[0].item}">
+                  <b>${Cur.title[0]}</b><br />
+                  <a href="${Cur.link}">${Cur.link}</a><br />
+                  <span class="textSmall">${Cur.pubDate}</a>
+               </li>
+            </ul>
+         </div>
+         <div id="pageCraigslist" class="page">
+            <ul>
+               <li repeat="${feeds.content.query.results.results[1].item}">
+                  <b>${Cur.title[0]}</b><br />
+                  <a href="${Cur.link}">${Cur.link}</a><br />
+                  <span class="textSmall">${Cur.date}</a>
+               </li>
+            </ul>
+         </div>
+      </script>
+
+      <script type="text/javascript">
+         //swap the visibility of one page
+         function switchNode(activate, deactivate, linkObj){
+            //get page nodes to swap
+            var showNode = document.getElementById(activate);
+            var hideNode = document.getElementById(deactivate);
+      
+            //switch the display properties of the two pages
+            hideNode.className = "page hide";
+            showNode.className = "page";
+               
+            //swap link tab classes
+            var linkAlt = (linkObj.id == "linkCraigslist") ?
+                          document.getElementById("linkReddit") : 
+                          document.getElementById("linkCraigslist");
+            linkObj.className = "";
+            linkAlt.className = "navOff";
+         };
+      </script>
+      ]]>
+   </Content>
+</Module>
+

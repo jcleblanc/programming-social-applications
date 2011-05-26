@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Loading data via Data Pipelining">
+      <Require feature="opensocial-data" />
+   </ModulePrefs>
+   <Content type="url" view="canvas" href="http://www.mysite.com/canvas.php">
+        <os:PeopleRequest key="ownerFriends" userId="@owner" 
+                          groupId="@friends" startIndex="10" count="20" 
+                          fields="name,nickname,gender,birthday" />
+      </Content>
+</Module>
+

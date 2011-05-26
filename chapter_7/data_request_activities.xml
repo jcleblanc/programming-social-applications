@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Loading data via Data Pipelining">
+      <Require feature="opensocial-data" />
+   </ModulePrefs>
+   <Content type="html">
+      <![CDATA[      
+      <script type="text/os-data" xmlns:os="http://ns.opensocial.org/2008/markup">
+         <os:ActivitiesRequest key="ViewerActivities" userid="@viewer" startIndex="40" 
+                               count="20"/>
+      </script>     
+      ]]>
+   </Content>
+</Module>

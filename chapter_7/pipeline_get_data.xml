@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Data Pipelining Example">
+      <Require feature="opensocial-data" />
+   </ModulePrefs>
+   <Content type="url" view="canvas">
+       <script type="text/os-data" xmlns:os="http://ns.opensocial.org/2008/markup">
+       <os:ViewerRequest key="viewerData" fields="name, nickname, gender"/>
+       <os:PeopleRequest key="viewerFriends" userId="@viewer" 
+                         groupId="@friends" count="50" 
+                         fields="name, nickname, gender" />
+       </script>
+
+       <script>
+       var viewerSrc = opensocial.data.getContext().getDataSet('viewerData');
+       var viewerFriendSrc = opensocial.data.getContext().getDataSet('viewerFriends');
+       var viewerName = viewerSrc.name; 
+       </script>
+   </Content>
+</Module>
+

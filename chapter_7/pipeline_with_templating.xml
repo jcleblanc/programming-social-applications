@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+   <ModulePrefs title="Reddit Headline Fetch"
+                title_url="http://www.jcleblanc.com"
+                description="Obtains reddit.com headlines via YQL using data
+                             pipelining and visualizes using OS templates"
+                author="Jonathan LeBlanc">
+      <Require feature="opensocial-0.9"/>
+      <Require feature="opensocial-data" />
+      <Require feature="opensocial-templates" />  
+   </ModulePrefs>
+   <Content type="html">
+      <![CDATA[
+      <script type="text/os-data" 
+              xmlns:os="http://ns.opensocial.org/2008/markup">
+         <os:HttpRequest key="reddit" href="http://query.yahooapis.com/v1/public/
+             yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2F
+             www.reddit.com%22%20and%0A%20%20%20%20%20%20xpath%3D'%2F%2Fa%5B
+             %40class%3D%22title%22%5D'&format=json"/>
+      </script>
+      <script type="text/os-template" require="reddit">
+         <ul>
+            <li repeat="${reddit.content.query.results.a}">
+               <a href="${Cur.href}">${Cur.content}</a>
+            </li>
+         </ul>
+      </script>
+      ]]>
+   </Content>
+</Module>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Data Pipelining Example">
+      <Require feature="opensocial-data" />
+   </ModulePrefs>
+   <Content type="url" view="canvas">
+      <script type="text/os-data" xmlns:os="http://ns.opensocial.org/2008/markup">
+      <os:ViewerRequest key="viewerData" />
+      </script>
+
+      <script>
+      opensocial.data.getDataContext().registerListener('viewerData', function(keys){    
+         //get hidden div with a success message
+         var successMsg = document.getElementById('Message');
+   
+         //display the success message
+         successMsg.style.display = 'block';
+      }); 
+      </script>
+   </Content>
+</Module>

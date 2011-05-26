@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Data Pipelining Example">
+      <Require feature="opensocial-data" />
+   </ModulePrefs>
+   <Content type="url" view="canvas">
+      <script type="text/os-data" xmlns:os="http://ns.opensocial.org/2008/markup">
+      <os:ViewerRequest key="viewerInterests" fields="interests"/>
+      </script>
+
+      <script>
+      var newData = {
+         "product1": "http://www.mysite.com/product.php?id=123",
+         "product2": "http://www.mysite.com/product.php?id=456",
+         "product3": "http://www.mysite.com/product.php?id=789"
+      };
+
+      os.data.getDataContext().putDataSet('viewerInterests', newData);
+      </script>
+   </Content>
+</Module>
+

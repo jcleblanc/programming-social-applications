@@ -1,0 +1,12 @@
+<div id="profile"></div>
+<script type="text/javascript">
+//create html string
+var profileHtml = "<img src='" + userData.thumbnailUrl + "' style='float:left; "
+                + "margin-right:10px;' />Name: " + userData.name + "<br />Gender: " 
+                + "userData.gender<br />Profile: <a href='" + userData.profileUrl" 
+                + "'>Click Here</a>";
+
+//insert html into profile node
+document.getElementById("profile").innerHTML = profileHtml;
+</script>
+
