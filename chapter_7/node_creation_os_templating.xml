@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Module>
-   <ModulePrefs title="Templating"
+   <ModulePrefs title="Templating">
       <Require feature="opensocial-0.9"/>
       <Require feature="opensocial-data" />
       <Require feature="opensocial-templates" />
