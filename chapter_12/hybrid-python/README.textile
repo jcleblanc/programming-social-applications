@@ -1,0 +1,19 @@
+h2. Yahoo! OpenID / OAuth Hybrid Auth Sample Code
+
+The sample code contained in this project is intended to be used to capture the private Yahoo! profile of a user using OpenID with the OAuth hybrid extension.  This project contains several files that are required for integration:
+* app.yaml - The Google App Engine config file
+* index.py - The form allowing the user to input the OpenID provider URI that they would like to use
+* common.py - Common variables
+* auth.py - Initiates the hybrid auth request
+* complete.py - Completes the hybrid auth request
+
+To use this sample:
+* Create a new OAuth (not YAP) application on Yahoo! at https://developer.apps.yahoo.com/projects
+* Modify common.py with your consumer key and secret obtained from the application
+* You may load the application within Google App Engine using the app.yaml file or load it through any other means
+* Load index.py to initiate the process
+
+Dependencies:
+This sample code uses the following two libraries:
+* OAuth (oauth folder): The Leah Culver OAuth library obtained from http://oauth.googlecode.com/svn/code/python/oauth/
+* OpenID (openid folder): The JanRain OpenID library obtained from http://www.janrain.com/openid-enabled
