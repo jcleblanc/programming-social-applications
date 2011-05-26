@@ -1,0 +1,37 @@
+h2. OAuth PHP Sample Code
+
+The sample code contained in this project is intended to be used to showcase the OAuth 1.0a flow in order to post to the Yahoo! update stream.  This sample code includes the following files:
+* index.php - This file will begin the OAuth process.  The request token will be generated and the user will be forwarded on to a Yahoo! login in order to authenticate the request token
+* complete.php - Following the redirect for the user to sign in, this file will exchange the authenticated request token for an access token and then use that token to push an update to the Yahoo! update stream.
+* common.php - Configuration variables, URLs and common functions.  The user NEEDS TO input their OAuth consumer key, consumer secret, application id and absolute URL to their complete.php file on their server within this file.  Full integration details in the "Setting Up This Example" section.
+
+h3. Library Dependancies
+
+This sample code requires the OAuth PHP library located at http://oauth.googlecode.com/svn/code/php/OAuth.php.  This file needs to be copied to the same folder as the files located in this project.
+
+h3. Setting Up This Example
+
+To set up this example, there are several steps that need to be taken:
+* Go to https://developer.apps.yahoo.com/projects and create a new project.  Select the option for "OAuth Application".  Once this project is completed you will be provided with a consumer key, consumer secret and application id.
+* Within common.php, input the consumer key into the $key variable, the consumer secret into the $secret variable and the application id into the $appid variable. 
+* Within common.php, replace the $base_url variable with the absolute path to the complete.php file on your server
+
+h3. Code Contributions
+
+This project only accepts contributions licensed under the BSD open source license. See the Open Source Initiative's approved template below.<br>
+
+Each file submitted should contain the following information in the header:<br>
+// Created by Jonathan LeBlanc<br>
+// Copyright (c) Jonathan LeBlanc, 2010.  All Rights Reserved.<br>
+// Licensed under the BSD (revised) open source license.<br>
+
+Below is the Open Source Initiative BSD License Template (http://opensource.org/licenses/bsd-license.php):<br>
+
+Copyright (c) &lt;2010&gt;, &lt;Jonathan LeBlanc&gt;<br>
+All rights reserved.<br>
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+* Neither the name of the <ORGANIZATION> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.<br>
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
