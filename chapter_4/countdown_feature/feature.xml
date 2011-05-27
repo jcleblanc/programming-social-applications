@@ -1,0 +1,13 @@
+<feature>
+   <name>countdown</name>
+   <dependency>globals</dependency>
+   <gadget>
+      <script src="countdown_base.js"/>
+      <script src="taming.js"/>
+   </gadget>
+   <container>
+      <script src="countdown_base.js"/>
+      <script src="taming.js"/>
+   </container>
+</feature>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+   <ModulePrefs title="Countdown Application">
+      <Require feature="countdown"/>
+   </ModulePrefs>
+   <Content type="html">
+      <![CDATA[
+      <div id="countdown">...</div>
+      
+      <script type="text/javascript">
+      //calculate time left from current to future time
+      var currentTime = new Date();
+      var futureTime = new Date("May 26, 2011 17:55:00");
+      var timeLeft = (futureTime - currentTime) / 1000;
+
+      //initialize counter
+      gadgets.countdown.init(timeLeft, 'countdown');
+      </script>
+      ]]>
+   </Content>
+</Module>
+
