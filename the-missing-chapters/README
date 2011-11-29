@@ -1,0 +1,6 @@
+As many of you are aware, the print version of "Programming Social Applications" concluded at chapter 11 with the OpenID chapter.  The missing chapters was a series of additional work that didn't make it into the book, but was released by O'Reilly as a free download for the book.  The PDF included in this folder are the missing chapters.
+
+The PDF includes
+   * Chapter 12: This covers topics on mashing up OAuth 1.0a and OpenID using the OpenID / OAuth hybrid extension.
+   * Appendix I: Includes setup instructions and overviews for the base technology that we work with in the book.
+   * Appendix II: A glossery of terms. 
